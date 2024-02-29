@@ -1,11 +1,6 @@
 # HH99LV3
 
-## 유스케이스
-![image](https://github.com/lsc713/HH99LV3/assets/77494780/1d0f0860-f4e7-4bc9-b6f8-22d3c3a08138)
-
-## ERD
-![image](https://github.com/lsc713/HH99LV3/assets/77494780/37e17878-0c4c-4826-b423-87e396560ef6)
-
+## 요구사항 명세
 - [ ]  관리자 가입 기능
   - `이메일`, `비밀번호`, `부서`, `권한`을 저장할 수 있습니다.
     - 커리큘럼, 마케팅, 개발 `부서`가 있습니다.
@@ -94,23 +89,33 @@
         - API들이 가지고 있는 스펙(spec)을 명세, 관리할 수 있으며 백엔드와 프론트엔드가 협업할 때 사용할 수 있습니다!
 
 
+## 유스케이스
+![image](https://github.com/lsc713/HH99LV3/assets/77494780/1d0f0860-f4e7-4bc9-b6f8-22d3c3a08138)
+
+## ERD
+![image](https://github.com/lsc713/HH99LV3/assets/77494780/37e17878-0c4c-4826-b423-87e396560ef6)
+
 ## API 명세
-회원가입 - api/v1/admin/signup 
-로그인 - api/v1/admin
-강사 등록 - post api/v1/admin
-강의 등록 - post api/v1/lecture
-선택한 강사 조회 - get api/v1/admin/{tutorId}
-선택한 강의 조회 - get api/v1/lecture/{lectureId}
-카테고리별 강의 목록 조회 - get api/v1/lecture/{category}
-선택한 강사가 촬영한 강의 목록 조회 기능 - get api/v1/tutor/{tutorId}
-강사 정보 수정 - put api/v1/admin/{adminId}
-강의 정보 수정 - put api/v1/lecture/{lectureId}
-강사 정보 삭제 - delete api/v1/admin/{adminId}
-강의 정보 삭제 - delete api/v1/lecture/{lectureId}
+- 회원가입 - api/v1/admin/signup -> 유하
+- 로그인 - api/v1/admin -> 유하
+- 강사 등록 - post api/v1/admin -> 유하
+- 강의 등록 - post api/v1/lecture -> 주호
+- 선택한 강사 조회 - get api/v1/admin/{tutorId} -> 유하
+- 선택한 강의 조회 - get api/v1/lecture/{lectureId} -> 주호
+- 카테고리별 강의 목록 조회 - get api/v1/lecture/{category} -> 주호
+- 선택한 강사가 촬영한 강의 목록 조회 기능 - get api/v1/tutor/{tutorId}
+- 강사 정보 수정 - put api/v1/admin/{adminId} -> 유하
+- 강의 정보 수정 - put api/v1/lecture/{lectureId} -> 주호
+- 강사 정보 삭제 - delete api/v1/admin/{adminId} -> 유하
+- 강의 정보 삭제 - delete api/v1/lecture/{lectureId} -> 주호
+- 에러 처리 -> 주호
 + 시간이 된다면 swagger
 + 더 있으면 security
 
-
+## commit 규칙
+- commit message = feat(기능 추가), refactor(코드 리팩토링), docs(문서 추가), fix(버그 수정), chore(관리): issue 제목
+- commit message 내용 = body = issue의 기능
+- pr merge시 서로의 승인 필요
 
 
 
