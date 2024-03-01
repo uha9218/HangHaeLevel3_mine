@@ -1,26 +1,30 @@
 package com.sparta.hh99springlv3.domain.admin.service;
 
+import com.sparta.hh99springlv3.domain.admin.dto.AdminRequestDto.LoginRequestDto;
 import com.sparta.hh99springlv3.domain.admin.dto.AdminRequestDto.SignupRequestDto;
+import com.sparta.hh99springlv3.domain.admin.dto.AdminResponseDto.LoginResponseDto;
 import com.sparta.hh99springlv3.domain.admin.dto.AdminResponseDto.SignupResponseDto;
 import com.sparta.hh99springlv3.domain.admin.entity.Admin;
 import com.sparta.hh99springlv3.domain.admin.entity.AuthEnum;
 import com.sparta.hh99springlv3.domain.admin.entity.Dept;
 import com.sparta.hh99springlv3.domain.admin.repository.AdminRepository;
+import com.sparta.hh99springlv3.global.jwt.JwtUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.sparta.hh99springlv3.domain.admin.entity.AuthEnum.MANAGER;
-
 @Service
 public class AdminService {
     private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    public AdminService(AdminRepository adminRepository, PasswordEncoder passwordEncoder) {
+    public AdminService(AdminRepository adminRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.adminRepository = adminRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
 
@@ -50,5 +54,26 @@ public class AdminService {
         // 사용자 등록
         Admin admin = adminRepository.save(requestDto.toEntity(auth, password));
         return new SignupResponseDto(admin);
+    }
+
+    public LoginResponseDto login(LoginRequestDto requestDto, HttpServletResponse res) {
+        String email = requestDto.getEmail();
+        String password = requestDto.getPassword();
+
+        // 사용자 확인
+        Admin admin = adminRepository.findByEmail(email).orElseThrow(
+                () -> new IllegalArgumentException("등록된 사용자가 없습니다.")
+        );
+
+        // 비밀번호 확인
+        if (!passwordEncoder.matches(password, admin.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        // JWT 생성 및 쿠키에 저장 후 Response 객체에 추가
+        String token = jwtUtil.createToken(admin.getAdminId(), admin.getAuthority());
+        jwtUtil.addJwtToCookie(token, res);
+
+        return new LoginResponseDto(admin);
     }
 }

@@ -28,4 +28,15 @@ public class AdminResponseDto {
 
             }
     }
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static  class LoginResponseDto{
+        private String email;
+        private String password;
+        public LoginResponseDto(Admin admin){
+            this.email =admin.getEmail();
+            this.password= admin.getPassword();
+        }
+    }
 }
