@@ -1,9 +1,11 @@
 package com.sparta.hh99springlv3.domain.admin.entity;
 
-import com.sparta.hh99springlv3.domain.admin.dto.AdminRequestDto;
 import com.sparta.hh99springlv3.global.entity.Timestamped;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter

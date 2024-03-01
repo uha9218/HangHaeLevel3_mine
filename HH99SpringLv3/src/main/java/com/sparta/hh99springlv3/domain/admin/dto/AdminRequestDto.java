@@ -20,19 +20,24 @@ public class AdminRequestDto {
         private Dept dept;
         private boolean auth = false;
         private String adminToken = "";
-        public SignupRequestDto(String email, String password, boolean auth, Dept dept, String adminToken ){
-            this.email = email;
-            this.password = password;
-            this.dept = dept;
-            this.auth = auth;
-            this.adminToken =adminToken;
-        }
+
         public Admin toEntity(AuthEnum auth, String password){
             return Admin.builder()
                     .email(email)
                     .password(password)
                     .dept(dept)
                     .Authority(auth)
+                    .build();
+        }
+    }
+    @Getter
+    public static class LoginRequestDto{
+        private String email;
+        private String password;
+        public Admin toEntity(){
+            return Admin.builder()
+                    .email(email)
+                    .password(password)
                     .build();
         }
     }
