@@ -70,4 +70,14 @@ public class TutorService {
         tutor.updateTutorInfo(requestDto);
         return new UpdateTutorResponseDto(tutor);
     }
+
+    public long deleteTutor(long tutorId, String tokenValue){
+        if(!checkAuthority(tokenValue)){
+            throw new CustomApiException(UNAUTHORIZED_ADMIN.getMessage());
+        }
+        Tutor tutor = tutorRepository.findById(tutorId)
+                .orElseThrow(() -> new CustomApiException(NOT_FOUND_TUTOR_ID.getMessage()));
+        tutorRepository.delete(tutor);
+        return tutorId;
+    }
 }
