@@ -1,25 +1,37 @@
 package com.sparta.hh99springlv3.domain.lecture.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.sparta.hh99springlv3.global.entity.Timestamped;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Lecture {
+@Builder
+@AllArgsConstructor
+public class Lecture extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String LectureName;
+    @Column(nullable = false,unique = true)
+    private String lectureName;
+    @Column(nullable = false)
     private int price;
+    @Column(nullable = false)
     private String lecIntroduce;
-    private String category;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private LCareer category;
+
+    @Column(nullable = false)
+    private String tutor;
+
 
 
 }
