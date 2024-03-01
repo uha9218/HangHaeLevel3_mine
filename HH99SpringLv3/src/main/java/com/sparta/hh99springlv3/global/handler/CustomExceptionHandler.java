@@ -4,6 +4,8 @@ import com.sparta.hh99springlv3.global.dto.ResponseDto;
 import com.sparta.hh99springlv3.global.handler.exception.CustomApiException;
 import com.sparta.hh99springlv3.global.handler.exception.CustomValidationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -22,6 +24,11 @@ public class CustomExceptionHandler {
     public ResponseEntity<Object> handlerCustomValidationApiException(CustomValidationException e) {
 
         return ResponseEntity.badRequest().body(new ResponseDto<>(false, e.getMessage(), e.getErrorMap()));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> processValidationError(MethodArgumentNotValidException e) {
+        return ResponseEntity.badRequest().body(new ResponseDto<>(false, e.getMessage(), null));
     }
 //    return userExportRepository.findAll().stream()
 //                .map(user -> Applicant.builder()

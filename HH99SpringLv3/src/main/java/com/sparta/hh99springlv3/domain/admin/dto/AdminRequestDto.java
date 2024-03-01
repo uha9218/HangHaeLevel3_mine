@@ -1,0 +1,39 @@
+package com.sparta.hh99springlv3.domain.admin.dto;
+
+import com.sparta.hh99springlv3.domain.admin.entity.Admin;
+import com.sparta.hh99springlv3.domain.admin.entity.AuthEnum;
+import com.sparta.hh99springlv3.domain.admin.entity.Dept;
+import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+public class AdminRequestDto {
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static  class SignupRequestDto {
+        @Pattern(regexp = "^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\\.[A-Za-z0-9\\-]+$")
+        private String email;
+        @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,15}$")
+        private String password;
+        private Dept dept;
+        private boolean auth = false;
+        private String adminToken = "";
+        public SignupRequestDto(String email, String password, boolean auth, Dept dept, String adminToken ){
+            this.email = email;
+            this.password = password;
+            this.dept = dept;
+            this.auth = auth;
+            this.adminToken =adminToken;
+        }
+        public Admin toEntity(AuthEnum auth, String password){
+            return Admin.builder()
+                    .email(email)
+                    .password(password)
+                    .dept(dept)
+                    .Authority(auth)
+                    .build();
+        }
+    }
+}
