@@ -20,6 +20,22 @@ public class TutorResponseDto {
             this.phoneNumber = tutor.getPhoneNumber();
             this.tuIntroduce = tutor.getTuIntroduce();
         }
+    }
+    @Getter
+    public static class ReadTutorResponseDto{
+        private String tutorName;
+        private String career;
+        private String company;
+        private String phoneNumber;
+        private String tuIntroduce;
+
+        public ReadTutorResponseDto(Tutor tutor){
+            this.tutorName = tutor.getTutorName();
+            this.career = tutor.getCareer();
+            this.company = tutor.getCompany();
+            this.phoneNumber = tutor.getPhoneNumber();
+            this.tuIntroduce = tutor.getTuIntroduce();
+        }
 
     }
 }
