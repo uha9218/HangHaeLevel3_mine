@@ -15,7 +15,7 @@ public enum ErrorCode {
     //강사
     NOT_FOUND_TUTOR_ID("찾을 수 없는 강사 정보입니다."),
     //강의
-    NOT_FOUND_CATEGORY_ID("찾을 수 없는 강의 종류 입니다."),//카테고리
+    NOT_FOUND_CATEGORY_ID("찾을 수 없는 강의 입니다."),//카테고리
     NOT_FOUND_LECTURE_INFORMATION("찾을 수 없는 강의 정보입니다."),//강의 정보조회시
 
 

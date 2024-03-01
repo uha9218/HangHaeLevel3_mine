@@ -47,8 +47,10 @@ public class AdminService {
         String password = passwordEncoder.encode(requestDto.getPassword());
         String email = requestDto.getEmail();
 
-        Admin findAdmin = adminRepository.findByUsername(username).orElseThrow(
-                () -> new IllegalArgumentException("g2"));
+        Admin findAdmin = adminRepository.findByUsername(username).orElse(null);
+        if(findAdmin != null){
+            throw new CustomApiException(ALREADY_REGISTERED_USER.getMessage());
+        }
         adminRepository.findByEmail(email).orElseThrow(() -> new CustomValidationException(ALREADY_REGISTERED_EMAIL.getMessage(),Map.of("email","이미 등록된 이메일 입니다.")));
 
         AdminRoleEnum manager = requestDto.isManager()? AdminRoleEnum.MANAGER : AdminRoleEnum.ADMIN;
