@@ -1,5 +1,6 @@
 package com.sparta.hh99springlv3.domain.tutor.entity;
 
+import com.sparta.hh99springlv3.domain.tutor.dto.TutorRequestDto.UpdateTutorRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,4 +24,11 @@ public class Tutor {
     @Column(nullable = false)
     private String phoneNumber;
     private String tuIntroduce;
+
+    public void updateTutorInfo(UpdateTutorRequestDto tutor){
+        this.career = tutor.getCareer();
+        this.company = tutor.getCompany();
+        this.phoneNumber = tutor.getPhoneNumber();
+        this.tuIntroduce = tutor.getTuIntroduce();
+    }
 }

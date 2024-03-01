@@ -25,5 +25,12 @@ public class TutorRequestDto {
                     .build();
         }
     }
+    @Getter
+    public static class UpdateTutorRequestDto{
+        private String career;
+        private String company;
+        private String phoneNumber;
+        private String tuIntroduce;
+    }
 
 }
