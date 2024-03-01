@@ -1,5 +1,6 @@
 package com.sparta.hh99springlv3.domain.tutor.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@Entity
 public class Tutor {
 
     @Id
