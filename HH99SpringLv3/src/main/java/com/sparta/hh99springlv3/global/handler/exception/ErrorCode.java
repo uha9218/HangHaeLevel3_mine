@@ -20,7 +20,8 @@ public enum ErrorCode {
 
 
     //회원가입
-    ALREADY_REGISTERED_PHONE("이미 가입된 휴대폰 번호입니다."),
+    ALREADY_REGISTERED_USER("이미 가입된 이용자 입니다."),
+    ALREADY_REGISTERED_EMAIL("이미 가입된 이메일 입니다."),
     ALREADY_REGISTERED_IDENTIFICATION("이미 가입된 주민번호입니다."),
 
     ;
