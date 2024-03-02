@@ -31,4 +31,9 @@ public class TutorController {
     public UpdateTutorResponseDto updateTutorInfo(@PathVariable Long tutorId, @RequestBody UpdateTutorRequestDto requestDto,@CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue){
         return tutorService.updateTutorInfo(tutorId, requestDto, tokenValue);
     }
+
+    @DeleteMapping("/{tutorId}")
+    public long deleteTutor(@PathVariable Long tutorId, @CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue){
+        return tutorService.deleteTutor(tutorId,tokenValue);
+    }
 }
