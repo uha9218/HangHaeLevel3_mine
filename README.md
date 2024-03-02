@@ -96,11 +96,12 @@
 ![image](https://github.com/lsc713/HH99LV3/assets/77494780/37e17878-0c4c-4826-b423-87e396560ef6)
 
 ## API 명세
+- http://localhost:8080/swagger-ui/index.html
 ![image](https://github.com/lsc713/HH99LV3/assets/139448668/89c6de0b-3f85-410f-a019-5992eab2d568)
 ![image](https://github.com/lsc713/HH99LV3/assets/139448668/ae2ccb3b-0211-42d3-a201-491c6bbe6b97)
 ![image](https://github.com/lsc713/HH99LV3/assets/139448668/7bf25c0c-0e5d-403e-96e7-240d10739220)
 
-- http://localhost:8080/swagger-ui/index.html
+
 
 ## commit 규칙
 - commit message = feat(기능 추가), refactor(코드 리팩토링), docs(문서 추가), fix(버그 수정), chore(관리): issue 제목
