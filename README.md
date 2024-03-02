@@ -96,21 +96,7 @@
 ![image](https://github.com/lsc713/HH99LV3/assets/77494780/37e17878-0c4c-4826-b423-87e396560ef6)
 
 ## API 명세
-- 회원가입 - api/v1/admin/signup -> 유하
-- 로그인 - api/v1/admin -> 유하
-- 강사 등록 - post api/v1/admin -> 유하
-- 강의 등록 - post api/v1/lecture -> 주호
-- 선택한 강사 조회 - get api/v1/admin/{tutorId} -> 유하
-- 선택한 강의 조회 - get api/v1/lecture/{lectureId} -> 주호
-- 카테고리별 강의 목록 조회 - get api/v1/lecture/{category} -> 주호
-- 선택한 강사가 촬영한 강의 목록 조회 기능 - get api/v1/tutor/{tutorId}
-- 강사 정보 수정 - put api/v1/admin/{adminId} -> 유하
-- 강의 정보 수정 - put api/v1/lecture/{lectureId} -> 주호
-- 강사 정보 삭제 - delete api/v1/admin/{adminId} -> 유하
-- 강의 정보 삭제 - delete api/v1/lecture/{lectureId} -> 주호
-- 에러 처리 -> 주호
-+ 시간이 된다면 swagger
-+ 더 있으면 security
+https://github.com/lsc713/HH99LV3/assets/139448668/89c6de0b-3f85-410f-a019-5992eab2d568
 
 ## commit 규칙
 - commit message = feat(기능 추가), refactor(코드 리팩토링), docs(문서 추가), fix(버그 수정), chore(관리): issue 제목
