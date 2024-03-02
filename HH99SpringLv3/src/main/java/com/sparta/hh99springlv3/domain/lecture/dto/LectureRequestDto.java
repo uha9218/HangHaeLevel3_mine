@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 public class LectureRequestDto {
 
 
@@ -17,7 +19,8 @@ public class LectureRequestDto {
         private int price;
         private String lecIntroduce;
         private Category category;
-        private String tutor;
+        private Long tutor;
+        private LocalDateTime createdAt;
 
         public Lecture toEntity() {
             return Lecture.builder()
@@ -26,17 +29,19 @@ public class LectureRequestDto {
                     .lecIntroduce(this.lecIntroduce)
                     .category(this.category)
                     .tutor(this.tutor)
+                    .createdAt(this.createdAt)
+                    .category(this.category)
                     .build();
         }
     }
 
     @Getter
-    public static class UpdateLectureRequestDto{
+    public static class UpdateLectureRequestDto {
         private String lectureName;
         private int price;
         private String lecIntroduce;
+        private Long tutor;
         private Category category;
-        private String tutor;
 
 
     }

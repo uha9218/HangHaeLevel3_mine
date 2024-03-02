@@ -35,7 +35,7 @@ public class LectureService {
     }
 
     @Transactional(readOnly = true)
-    public GetLectureResponseDto getLecture(Long id,String tokenValue) {
+    public GetLectureResponseDto getLecture(Long id, String tokenValue) {
         isExpiredToken(jwtUtil.substringToken(tokenValue));
         Lecture lecture = lectureRepository.findById(id).orElseThrow(
                 () -> new CustomApiException(NOT_FOUND_CATEGORY_ID.getMessage()));
@@ -53,12 +53,28 @@ public class LectureService {
     @Transactional
     public GetLectureResponseDto updateLecture(Long id, UpdateLectureRequestDto requestDto, String tokenValue) {
         isExpiredToken(jwtUtil.substringToken(tokenValue));
-        Lecture lecture = lectureRepository.findById(id).orElseThrow(()->new CustomApiException(NOT_FOUND_ADMIN_ID.getMessage()));
-        if (!checkAuthority(tokenValue)){
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new CustomApiException(NOT_FOUND_ADMIN_ID.getMessage()));
+        if (!checkAuthority(tokenValue)) {
             throw new CustomApiException(UNAUTHORIZED_ADMIN.getMessage());
         }
         lecture.update(requestDto);
         return new GetLectureResponseDto(lecture);
+    }
+
+    @Transactional(readOnly = true)
+    public List<GetLectureResponseDto> getLectureByTutor(Long tutorId, String tokenValue) {
+        String token = jwtUtil.substringToken(tokenValue);
+        isExpiredToken(token);
+        return lectureRepository.findAllByTutorOrderByCreatedAtDesc(tutorId).stream().map(GetLectureResponseDto::new).toList();
+    }
+
+    public Long deleteLecture(Long lectureId, String tokenValue) {
+        String token = jwtUtil.substringToken(tokenValue);
+        isExpiredToken(token);
+        Lecture lecture = lectureRepository.findById(lectureId)
+                .orElseThrow(() -> new CustomApiException(NOT_FOUND_LECTURE_INFORMATION.getMessage()));
+        lectureRepository.delete(lecture);
+        return lectureId;
     }
 
     private boolean checkAuthority(String tokenValue) {
@@ -67,7 +83,7 @@ public class LectureService {
         //권한이 Manager인지 확인
         Claims info = jwtUtil.getUserInfoFromToken(token);
         String authority = (String) info.get(JwtUtil.AUTHORIZATION_KEY);
-        if(!(AuthEnum.valueOf(authority)).equals(AuthEnum.MANAGER)){
+        if (!(AuthEnum.valueOf(authority)).equals(AuthEnum.MANAGER)) {
             return !isManager;
         }
         return isManager;
