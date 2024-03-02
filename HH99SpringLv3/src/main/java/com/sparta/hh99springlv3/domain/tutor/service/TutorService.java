@@ -1,8 +1,10 @@
 package com.sparta.hh99springlv3.domain.tutor.service;
 
 import com.sparta.hh99springlv3.domain.admin.entity.AuthEnum;
-import com.sparta.hh99springlv3.domain.tutor.dto.TutorRequestDto;
+import com.sparta.hh99springlv3.domain.tutor.dto.TutorRequestDto.UpdateTutorRequestDto;
 import com.sparta.hh99springlv3.domain.tutor.dto.TutorRequestDto.CreateTutorRequestDto;
+import com.sparta.hh99springlv3.domain.tutor.dto.TutorResponseDto;
+import com.sparta.hh99springlv3.domain.tutor.dto.TutorResponseDto.UpdateTutorResponseDto;
 import com.sparta.hh99springlv3.domain.tutor.dto.TutorResponseDto.ReadTutorResponseDto;
 import com.sparta.hh99springlv3.domain.tutor.dto.TutorResponseDto.CreateTutorResponseDto;
 import com.sparta.hh99springlv3.domain.tutor.entity.Tutor;
@@ -12,6 +14,7 @@ import com.sparta.hh99springlv3.global.jwt.JwtUtil;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.sparta.hh99springlv3.global.handler.exception.ErrorCode.NOT_FOUND_TUTOR_ID;
 import static com.sparta.hh99springlv3.global.handler.exception.ErrorCode.UNAUTHORIZED_ADMIN;
@@ -34,8 +37,7 @@ public class TutorService {
         Claims info = jwtUtil.getUserInfoFromToken(token);
         String authority = (String) info.get(JwtUtil.AUTHORIZATION_KEY);
         if(!(AuthEnum.valueOf(authority)).equals(AuthEnum.MANAGER)){
-             isMANAGER=false;
-             return isMANAGER;
+             return !isMANAGER;
         }
         return isMANAGER;
     }
@@ -46,6 +48,7 @@ public class TutorService {
         Tutor tutor = tutorRepository.save(requestDto.toEntity());
         return new CreateTutorResponseDto(tutor);
     }
+    @Transactional(readOnly = true)
     public ReadTutorResponseDto readTutorInfo(Long tutorId, String tokenValue){
         if(!checkAuthority(tokenValue)){
             throw new CustomApiException(UNAUTHORIZED_ADMIN.getMessage());
@@ -54,5 +57,17 @@ public class TutorService {
                 .orElseThrow(() -> new CustomApiException(NOT_FOUND_TUTOR_ID.getMessage()));
 
         return new ReadTutorResponseDto(tutor);
+    }
+
+    @Transactional
+    public UpdateTutorResponseDto updateTutorInfo(long tutorId,UpdateTutorRequestDto requestDto, String tokenValue){
+        if(!checkAuthority(tokenValue)){
+            throw new CustomApiException(UNAUTHORIZED_ADMIN.getMessage());
+        }
+        Tutor tutor = tutorRepository.findById(tutorId)
+                .orElseThrow(() -> new CustomApiException(NOT_FOUND_TUTOR_ID.getMessage()));
+
+        tutor.updateTutorInfo(requestDto);
+        return new UpdateTutorResponseDto(tutor);
     }
 }

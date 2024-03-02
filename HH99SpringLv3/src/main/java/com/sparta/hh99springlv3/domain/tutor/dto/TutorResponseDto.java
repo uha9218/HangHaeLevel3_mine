@@ -38,4 +38,20 @@ public class TutorResponseDto {
         }
 
     }
+    @Getter
+    public static class UpdateTutorResponseDto{
+        private String tutorName;
+        private String career;
+        private String company;
+        private String phoneNumber;
+        private String tuIntroduce;
+
+        public UpdateTutorResponseDto(Tutor tutor){
+            this.tutorName = tutor.getTutorName();
+            this.career = tutor.getCareer();
+            this.company = tutor.getCompany();
+            this.phoneNumber = tutor.getPhoneNumber();
+            this.tuIntroduce = tutor.getTuIntroduce();
+        }
+    }
 }
