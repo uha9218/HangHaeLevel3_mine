@@ -28,7 +28,8 @@ public class Lecture extends Timestamped {
     private String lecIntroduce;
 
     @Column(nullable = false)
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
     @Column(nullable = false)
     private String tutor;

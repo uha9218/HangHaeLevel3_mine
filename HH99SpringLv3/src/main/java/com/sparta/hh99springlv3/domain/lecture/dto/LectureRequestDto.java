@@ -1,8 +1,10 @@
 package com.sparta.hh99springlv3.domain.lecture.dto;
 
-import com.sparta.hh99springlv3.domain.lecture.entity.LCareer;
+import com.sparta.hh99springlv3.domain.lecture.entity.Category;
 import com.sparta.hh99springlv3.domain.lecture.entity.Lecture;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class LectureRequestDto {
 
@@ -14,7 +16,7 @@ public class LectureRequestDto {
         private String lectureName;
         private int price;
         private String lecIntroduce;
-        private String category;
+        private Category category;
         private String tutor;
 
         public Lecture toEntity() {
@@ -22,6 +24,7 @@ public class LectureRequestDto {
                     .lectureName(this.lectureName)
                     .price(this.price)
                     .lecIntroduce(this.lecIntroduce)
+                    .category(this.category)
                     .tutor(this.tutor)
                     .build();
         }
@@ -32,7 +35,7 @@ public class LectureRequestDto {
         private String lectureName;
         private int price;
         private String lecIntroduce;
-        private String category;
+        private Category category;
         private String tutor;
 
 

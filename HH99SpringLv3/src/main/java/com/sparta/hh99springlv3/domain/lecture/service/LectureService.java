@@ -1,11 +1,10 @@
 package com.sparta.hh99springlv3.domain.lecture.service;
 
-import com.sparta.hh99springlv3.domain.admin.entity.AuthEnum;
-import com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto;
 import com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto.UpdateLectureRequestDto;
-import com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto;
+import com.sparta.hh99springlv3.domain.lecture.entity.Category;
 import com.sparta.hh99springlv3.domain.lecture.entity.Lecture;
 import com.sparta.hh99springlv3.domain.lecture.repository.LectureRepository;
+import com.sparta.hh99springlv3.global.entity.AuthEnum;
 import com.sparta.hh99springlv3.global.handler.exception.CustomApiException;
 import com.sparta.hh99springlv3.global.jwt.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto.CreateLectureRequestDto;
-import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.*;
+import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.CreateLectureResponseDto;
 import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.GetLectureResponseDto;
 import static com.sparta.hh99springlv3.global.handler.exception.ErrorCode.*;
 
@@ -44,7 +43,7 @@ public class LectureService {
     }
 
     @Transactional(readOnly = true)
-    public List<GetLectureResponseDto> getLectureCategory(String category,String tokenValue) {
+    public List<GetLectureResponseDto> getLectureCategory(Category category, String tokenValue) {
         String token = jwtUtil.substringToken(tokenValue);
         isExpiredToken(token);
         List<Lecture> lecture = lectureRepository.findByCategory(category);

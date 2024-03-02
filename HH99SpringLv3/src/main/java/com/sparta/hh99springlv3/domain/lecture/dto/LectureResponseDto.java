@@ -1,14 +1,10 @@
 package com.sparta.hh99springlv3.domain.lecture.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sparta.hh99springlv3.domain.lecture.entity.LCareer;
+import com.sparta.hh99springlv3.domain.lecture.entity.Category;
 import com.sparta.hh99springlv3.domain.lecture.entity.Lecture;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 public class LectureResponseDto {
 
@@ -19,7 +15,7 @@ public class LectureResponseDto {
         private String lectureName;
         private int price;
         private String lecIntroduce;
-        private String category;
+        private Category category;
         private String tutor;
 
         public CreateLectureResponseDto(Lecture lecture){
@@ -39,7 +35,7 @@ public class LectureResponseDto {
         private String lectureName;
         private int price;
         private String lecIntroduce;
-        private String category;
+        private Category category;
         private String tutor;
 
 //        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")

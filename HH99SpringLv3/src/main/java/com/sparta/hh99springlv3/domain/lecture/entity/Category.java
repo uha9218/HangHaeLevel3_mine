@@ -5,8 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class LCareer {
-    private String spring;
-    private String react;
-    private String node;
+public enum Category {
+    SPRING("SPRING"),REACT("REACT"), NODE("NODE"),;
+    private final String category;
 }
