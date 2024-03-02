@@ -68,6 +68,15 @@ public class LectureService {
         return lectureRepository.findAllByTutorOrderByCreatedAtDesc(tutorId).stream().map(GetLectureResponseDto::new).toList();
     }
 
+    public Long deleteLecture(Long lectureId, String tokenValue){
+        String token = jwtUtil.substringToken(tokenValue);
+        isExpiredToken(token);
+        Lecture lecture = lectureRepository.findById(lectureId)
+                .orElseThrow(()->new CustomApiException(NOT_FOUND_LECTURE_INFORMATION.getMessage()));
+        lectureRepository.delete(lecture);
+        return lectureId;
+    }
+
     private boolean checkAuthority(String tokenValue) {
         boolean isManager = true;
         String token = jwtUtil.substringToken(tokenValue);

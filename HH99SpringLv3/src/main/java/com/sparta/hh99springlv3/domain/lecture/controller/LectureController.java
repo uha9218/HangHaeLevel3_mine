@@ -62,4 +62,11 @@ public class LectureController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(lectureService.getLectureByTutor(tutor, tokenValue));
     }
+
+    @DeleteMapping("/{lectureId}")
+    public ResponseEntity<Long> deleteLecture(@PathVariable Long lectureId, @CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue) {
+        return ResponseEntity.ok()
+                .body(lectureService.deleteLecture(lectureId, tokenValue));
+    }
+
 }
