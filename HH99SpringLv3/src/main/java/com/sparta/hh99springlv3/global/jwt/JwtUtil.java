@@ -1,6 +1,6 @@
 package com.sparta.hh99springlv3.global.jwt;
 
-import com.sparta.hh99springlv3.domain.admin.entity.AuthEnum;
+import com.sparta.hh99springlv3.global.entity.AuthEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -17,6 +17,7 @@ import java.net.URLEncoder;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+
 @Component
 public class JwtUtil {
     // Header KEY 값
@@ -41,6 +42,7 @@ public class JwtUtil {
         byte[] bytes = Base64.getDecoder().decode(secretKey);
         key = Keys.hmacShaKeyFor(bytes);
     }
+
     // 토큰 생성
     public String createToken(Long adminId, AuthEnum auth) {
         Date date = new Date();
@@ -54,6 +56,7 @@ public class JwtUtil {
                         .signWith(key, signatureAlgorithm) // 암호화 알고리즘
                         .compact();
     }
+
     // JWT Cookie 에 저장
     public void addJwtToCookie(String token, HttpServletResponse res) {
         try {
@@ -68,6 +71,7 @@ public class JwtUtil {
             logger.error(e.getMessage());
         }
     }
+
     // JWT 토큰 substring
     public String substringToken(String tokenValue) {
         if (StringUtils.hasText(tokenValue) && tokenValue.startsWith(BEARER_PREFIX)) {
@@ -76,6 +80,7 @@ public class JwtUtil {
         logger.error("Not Found Token");
         throw new NullPointerException("Not Found Token");
     }
+
     // 토큰 검증
     public boolean validateToken(String token) {
         try {
@@ -92,6 +97,7 @@ public class JwtUtil {
         }
         return false;
     }
+
     // 토큰에서 사용자 정보 가져오기
     public Claims getUserInfoFromToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();

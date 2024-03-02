@@ -4,13 +4,9 @@ import com.sparta.hh99springlv3.global.dto.ResponseDto;
 import com.sparta.hh99springlv3.global.handler.exception.CustomApiException;
 import com.sparta.hh99springlv3.global.handler.exception.CustomValidationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class CustomExceptionHandler {

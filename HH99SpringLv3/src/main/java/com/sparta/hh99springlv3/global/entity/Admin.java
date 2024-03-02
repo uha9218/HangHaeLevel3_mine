@@ -1,6 +1,5 @@
-package com.sparta.hh99springlv3.domain.admin.entity;
+package com.sparta.hh99springlv3.global.entity;
 
-import com.sparta.hh99springlv3.global.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="admins")
+@Table(name = "admins")
 public class Admin extends Timestamped {
 
     @Id

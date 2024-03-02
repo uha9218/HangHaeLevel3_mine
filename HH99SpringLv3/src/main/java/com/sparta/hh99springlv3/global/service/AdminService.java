@@ -1,14 +1,14 @@
-package com.sparta.hh99springlv3.domain.admin.service;
+package com.sparta.hh99springlv3.global.service;
 
-import com.sparta.hh99springlv3.domain.admin.dto.AdminRequestDto.LoginRequestDto;
-import com.sparta.hh99springlv3.domain.admin.dto.AdminRequestDto.SignupRequestDto;
-import com.sparta.hh99springlv3.domain.admin.dto.AdminResponseDto.LoginResponseDto;
-import com.sparta.hh99springlv3.domain.admin.dto.AdminResponseDto.SignupResponseDto;
-import com.sparta.hh99springlv3.domain.admin.entity.Admin;
-import com.sparta.hh99springlv3.domain.admin.entity.AuthEnum;
-import com.sparta.hh99springlv3.domain.admin.entity.Dept;
-import com.sparta.hh99springlv3.domain.admin.repository.AdminRepository;
+import com.sparta.hh99springlv3.global.dto.AdminRequestDto.LoginRequestDto;
+import com.sparta.hh99springlv3.global.dto.AdminRequestDto.SignupRequestDto;
+import com.sparta.hh99springlv3.global.dto.AdminResponseDto.LoginResponseDto;
+import com.sparta.hh99springlv3.global.dto.AdminResponseDto.SignupResponseDto;
+import com.sparta.hh99springlv3.global.entity.Admin;
+import com.sparta.hh99springlv3.global.entity.AuthEnum;
+import com.sparta.hh99springlv3.global.entity.Dept;
 import com.sparta.hh99springlv3.global.jwt.JwtUtil;
+import com.sparta.hh99springlv3.global.repository.AdminRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

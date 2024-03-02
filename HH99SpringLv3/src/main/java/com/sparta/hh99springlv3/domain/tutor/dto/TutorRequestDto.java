@@ -6,7 +6,7 @@ import lombok.Getter;
 
 public class TutorRequestDto {
     @Getter
-    public static class CreateTutorRequestDto{
+    public static class CreateTutorRequestDto {
         @NotBlank(message = "이름을 입력해주세요.")
         private String tutorName;
         private String career;
@@ -15,7 +15,7 @@ public class TutorRequestDto {
         private String phoneNumber;
         private String tuIntroduce;
 
-        public Tutor toEntity(){
+        public Tutor toEntity() {
             return Tutor.builder()
                     .tutorName(this.tutorName)
                     .career(this.career)
@@ -25,8 +25,9 @@ public class TutorRequestDto {
                     .build();
         }
     }
+
     @Getter
-    public static class UpdateTutorRequestDto{
+    public static class UpdateTutorRequestDto {
         private String career;
         private String company;
         private String phoneNumber;
