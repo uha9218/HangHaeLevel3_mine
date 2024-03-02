@@ -96,7 +96,7 @@
 ![image](https://github.com/lsc713/HH99LV3/assets/77494780/37e17878-0c4c-4826-b423-87e396560ef6)
 
 ## API 명세
-https://github.com/lsc713/HH99LV3/assets/139448668/89c6de0b-3f85-410f-a019-5992eab2d568
+![image](https://github.com/lsc713/HH99LV3/assets/139448668/89c6de0b-3f85-410f-a019-5992eab2d568)
 
 ## commit 규칙
 - commit message = feat(기능 추가), refactor(코드 리팩토링), docs(문서 추가), fix(버그 수정), chore(관리): issue 제목
