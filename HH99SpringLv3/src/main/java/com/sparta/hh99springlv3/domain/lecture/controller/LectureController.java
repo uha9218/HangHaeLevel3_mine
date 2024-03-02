@@ -20,7 +20,7 @@ import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.Get
 
 
 @RestController
-@RequestMapping("/api/v1/lecture")
+@RequestMapping("/api/v1/lectures")
 @RequiredArgsConstructor
 public class LectureController {
 
