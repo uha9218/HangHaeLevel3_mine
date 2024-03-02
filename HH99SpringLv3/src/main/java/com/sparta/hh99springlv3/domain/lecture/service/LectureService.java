@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto.CreateLectureRequestDto;
+import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.*;
 import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.GetLectureResponseDto;
 import static com.sparta.hh99springlv3.global.handler.exception.ErrorCode.*;
 
@@ -27,11 +28,11 @@ public class LectureService {
     private final LectureRepository lectureRepository;
     private final JwtUtil jwtUtil;
 
-    public LectureResponseDto createLecture(CreateLectureRequestDto requestDto, String tokenValue) {
+    public CreateLectureResponseDto createLecture(CreateLectureRequestDto requestDto, String tokenValue) {
         String token = jwtUtil.substringToken(tokenValue);
         isExpiredToken(token);
         Lecture lecture = lectureRepository.save(requestDto.toEntity());
-        return new LectureResponseDto();
+        return new CreateLectureResponseDto(lecture);
     }
 
     @Transactional(readOnly = true)
@@ -52,8 +53,7 @@ public class LectureService {
 
     @Transactional
     public GetLectureResponseDto updateLecture(Long id, UpdateLectureRequestDto requestDto, String tokenValue) {
-        String token = jwtUtil.substringToken(tokenValue);
-        isExpiredToken(token);
+        isExpiredToken(jwtUtil.substringToken(tokenValue));
         Lecture lecture = lectureRepository.findById(id).orElseThrow(()->new CustomApiException(NOT_FOUND_ADMIN_ID.getMessage()));
         if (!checkAuthority(tokenValue)){
             throw new CustomApiException(UNAUTHORIZED_ADMIN.getMessage());

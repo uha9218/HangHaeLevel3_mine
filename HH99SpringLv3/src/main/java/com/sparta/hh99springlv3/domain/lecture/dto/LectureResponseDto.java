@@ -15,7 +15,6 @@ public class LectureResponseDto {
 
     @Getter
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class CreateLectureResponseDto{
         private String lectureName;
         private int price;
@@ -23,14 +22,12 @@ public class LectureResponseDto {
         private String category;
         private String tutor;
 
-        public Lecture toEntity(){
-            return Lecture.builder()
-                    .lectureName(this.lectureName)
-                    .price(this.price)
-                    .lecIntroduce(this.lecIntroduce)
-                    .category(this.category)
-                    .tutor(this.tutor)
-                    .build();
+        public CreateLectureResponseDto(Lecture lecture){
+            this.lectureName = lecture.getLectureName();
+            this.price = lecture.getPrice();
+            this.lecIntroduce = lecture.getLecIntroduce();
+            this.category = lecture.getCategory();
+            this.tutor = lecture.getTutor();
         }
     }
 

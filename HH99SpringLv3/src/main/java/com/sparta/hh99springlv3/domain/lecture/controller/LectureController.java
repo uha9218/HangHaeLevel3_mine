@@ -5,11 +5,13 @@ import com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto;
 import com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto.CreateLectureRequestDto;
 import com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto.UpdateLectureRequestDto;
 import com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto;
+import com.sparta.hh99springlv3.domain.lecture.entity.Lecture;
 import com.sparta.hh99springlv3.domain.lecture.service.LectureService;
 import com.sparta.hh99springlv3.global.jwt.JwtUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -27,31 +29,34 @@ import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.*;
 public class LectureController {
 
     private final LectureService lectureService;
+
     @PostMapping("/")
-    public ResponseEntity<LectureResponseDto> createLecture(@RequestBody @Valid CreateLectureRequestDto requestDto,
-                                                            BindingResult bindingResult,
+    public ResponseEntity<CreateLectureResponseDto> createLecture(@RequestBody @Valid CreateLectureRequestDto requestDto,
                                                             @CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue) {
-        return ResponseEntity.ok(lectureService.createLecture(requestDto, tokenValue));
+        CreateLectureResponseDto responseDto = lectureService.createLecture(requestDto, tokenValue);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
     @Secured(AuthEnum.Authority.MANAGER)
     @PutMapping("/{lectureId}")
-    public GetLectureResponseDto updateLecture(@PathVariable Long lectureId, @RequestBody UpdateLectureRequestDto requestDto,
+    public ResponseEntity<GetLectureResponseDto> updateLecture(@PathVariable Long lectureId, @RequestBody UpdateLectureRequestDto requestDto,
                                             @CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue){
-        return lectureService.updateLecture(lectureId, requestDto, tokenValue);
+        GetLectureResponseDto responseDto = lectureService.updateLecture(lectureId, requestDto, tokenValue);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
+
     @GetMapping("/get/{lectureId}")
-    public GetLectureResponseDto getLecture(@PathVariable Long lectureId,
+    public ResponseEntity<GetLectureResponseDto> getLecture(@PathVariable Long lectureId,
                                             @CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue
                                             ) {
         GetLectureResponseDto responseDto = lectureService.getLecture(lectureId,tokenValue);
-        return responseDto;
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @GetMapping("/{category}")
-    public List<GetLectureResponseDto> getLectureCategory(@PathVariable String category,
+    public ResponseEntity<List<GetLectureResponseDto>> getLectureCategory(@PathVariable String category,
                                                           @CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue) {
 
         List<GetLectureResponseDto> responseDto = lectureService.getLectureCategory(category,tokenValue);
-        return ResponseEntity.ok(responseDto).getBody();
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }
