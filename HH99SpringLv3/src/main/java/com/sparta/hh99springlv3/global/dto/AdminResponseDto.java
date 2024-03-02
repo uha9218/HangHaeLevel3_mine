@@ -1,8 +1,8 @@
-package com.sparta.hh99springlv3.domain.admin.dto;
+package com.sparta.hh99springlv3.global.dto;
 
-import com.sparta.hh99springlv3.domain.admin.entity.Admin;
-import com.sparta.hh99springlv3.domain.admin.entity.AuthEnum;
-import com.sparta.hh99springlv3.domain.admin.entity.Dept;
+import com.sparta.hh99springlv3.global.entity.Admin;
+import com.sparta.hh99springlv3.global.entity.AuthEnum;
+import com.sparta.hh99springlv3.global.entity.Dept;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ public class AdminResponseDto {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static  class SignupResponseDto {
+    public static class SignupResponseDto {
             private Long AdminId;
             private String email;
             private String password;

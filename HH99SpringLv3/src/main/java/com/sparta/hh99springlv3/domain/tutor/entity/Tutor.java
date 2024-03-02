@@ -25,7 +25,7 @@ public class Tutor {
     private String phoneNumber;
     private String tuIntroduce;
 
-    public void updateTutorInfo(UpdateTutorRequestDto tutor){
+    public void updateTutorInfo(UpdateTutorRequestDto tutor) {
         this.career = tutor.getCareer();
         this.company = tutor.getCompany();
         this.phoneNumber = tutor.getPhoneNumber();
