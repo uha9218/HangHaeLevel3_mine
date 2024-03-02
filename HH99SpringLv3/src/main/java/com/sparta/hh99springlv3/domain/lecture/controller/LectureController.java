@@ -1,26 +1,23 @@
 package com.sparta.hh99springlv3.domain.lecture.controller;
 
-import com.sparta.hh99springlv3.domain.admin.entity.AuthEnum;
-import com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto;
 import com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto.CreateLectureRequestDto;
 import com.sparta.hh99springlv3.domain.lecture.dto.LectureRequestDto.UpdateLectureRequestDto;
-import com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto;
-import com.sparta.hh99springlv3.domain.lecture.entity.Lecture;
+import com.sparta.hh99springlv3.domain.lecture.entity.Category;
 import com.sparta.hh99springlv3.domain.lecture.service.LectureService;
+import com.sparta.hh99springlv3.global.entity.AuthEnum;
 import com.sparta.hh99springlv3.global.jwt.JwtUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.*;
+import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.CreateLectureResponseDto;
+import static com.sparta.hh99springlv3.domain.lecture.dto.LectureResponseDto.GetLectureResponseDto;
 
 
 @Controller
@@ -52,8 +49,8 @@ public class LectureController {
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
-    @GetMapping("/{category}")
-    public ResponseEntity<List<GetLectureResponseDto>> getLectureCategory(@PathVariable String category,
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<GetLectureResponseDto>> getLectureCategory(@PathVariable Category category,
                                                           @CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue) {
 
         List<GetLectureResponseDto> responseDto = lectureService.getLectureCategory(category,tokenValue);
